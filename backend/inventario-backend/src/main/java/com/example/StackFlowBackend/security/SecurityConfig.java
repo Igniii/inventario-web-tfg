@@ -1,4 +1,4 @@
-package com.example.StackFlowBackend.security; // <- ajusta el package
+package com.example.StackFlowBackend.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -6,10 +6,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -19,18 +18,22 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                .csrf(csrf -> csrf.disable())
-                // habilita CORS y le pasamos nuestro CorsConfigurationSource
+                .csrf(csrf -> csrf.disable()) // importante: para permitir POST/PUT desde Angular
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
-                        // permitir OPTIONS para preflight
+                        // permitir preflight CORS
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        // permitir health sin auth
-                        .requestMatchers("/api/health", "/api/ping", "/actuator/health").permitAll()
-                        // tus endpoints públicos adicionales si los hay
+
+                        // permitir todos los métodos a productos
+                        .requestMatchers("/api/productos/**").permitAll()
+
+                        // healthcheck
+                        .requestMatchers("/api/health", "/actuator/health").permitAll()
+
+                        // todo lo demás requiere autenticación
                         .anyRequest().authenticated()
                 )
-                // desactiva formularios/básica para desarrollo (si vas a usar JWT luego lo configuras)
+                // desactivar login por defecto
                 .formLogin(form -> form.disable())
                 .httpBasic(basic -> basic.disable());
 
@@ -40,10 +43,10 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:4200")); // origen de Angular
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedOrigins(List.of("http://localhost:4200", "http://127.0.0.1:4200"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true); // si necesitas cookies/autenticación por credenciales
+        config.setAllowCredentials(true);
         config.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
