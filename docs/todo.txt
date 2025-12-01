@@ -1,0 +1,13 @@
+registro de usuario - > puedo registrar pero no hay rol de user, se crea con rol null, 
+además que no veo artículos, falta revisar roles y que el admin pueda crear y user tenga permisos limitados
+añadir entidad proveedores, relacionada con productos y categorías
+editar productos
+estilos para poder visualizar todo
+pantalla inicial tras login dónde ver resumen de stock (dashboard sencillo)
+
+TODO
+- Cambiar estilo a componentes: crear-producto, crear-categoria, crear-proveedor
+- Crear componente admin-panel (poder crear, editar (nombre, contraseña) y eliminar usuarios)
+- Documentación / Memoria
+- Al añadir/quitar stock desde /productos que esté preseleccionado el producto al que estás añadiendo quitando stock
+- En el navbar tiene que aparecer el nombre del usuario con la sesión iniciada, debe ser el mismo que el del nombre de usuario
