@@ -39,8 +39,29 @@ public class AuthService {
         }
 
         // Generar JWT
-        String token = jwtService.generateToken(user.getUsername());
+        String token = jwtService.generateToken(user);
+
+
 
         return new LoginResponse(token);
     }
+
+    public void register(String username, String password) {
+
+        if (username == null || username.isBlank() ||
+                password == null || password.isBlank()) {
+            throw new IllegalArgumentException("Se necesita usuario y contraseña");
+        }
+
+        if (usuarioRepository.findByUsername(username).isPresent()) {
+            throw new IllegalArgumentException("El nombre de usuario ya existe");
+        }
+
+        Usuario u = new Usuario();
+        u.setUsername(username);
+        u.setRole("USER");
+        u.setPassword(passwordEncoder.encode(password));
+        usuarioRepository.save(u);
+    }
+
 }

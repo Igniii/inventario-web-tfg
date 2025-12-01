@@ -1,0 +1,41 @@
+<div class="register-background">
+  <div class="register-container mat-elevation-z6">
+
+    <h2>Crear Cuenta</h2>
+
+    <form (ngSubmit)="register()" #form="ngForm">
+
+      <!-- Usuario -->
+      <mat-form-field appearance="outline" class="input-full">
+        <mat-label>Usuario</mat-label>
+        <input matInput required name="username" [(ngModel)]="usuario.username">
+      </mat-form-field>
+
+      <!-- Contraseña -->
+      <mat-form-field appearance="outline" class="input-full">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" required name="password" [(ngModel)]="usuario.password">
+      </mat-form-field>
+
+      <!-- Rol (solo admin lo ve, opcional) -->
+      <mat-form-field appearance="outline" class="input-full" *ngIf="auth.isAdmin()">
+        <mat-label>Rol</mat-label>
+        <mat-select [(ngModel)]="usuario.rol" name="rol">
+          <mat-option value="USER">Usuario</mat-option>
+          <mat-option value="ADMIN">Administrador</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="btn-full">
+        Registrarse
+      </button>
+
+    </form>
+
+    <p class="login-link">
+      ¿Ya tienes cuenta?
+      <a routerLink="/login">Iniciar sesión</a>
+    </p>
+
+  </div>
+</div>

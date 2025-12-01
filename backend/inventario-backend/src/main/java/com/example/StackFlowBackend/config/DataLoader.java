@@ -22,7 +22,7 @@ public class DataLoader {
                 Usuario admin = new Usuario(
                         "admin",
                         encoder.encode("admin123"), // CONTRASEÑA
-                        "ROLE_ADMIN"
+                        "ADMIN"
                 );
 
                 repo.save(admin);

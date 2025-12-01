@@ -1,0 +1,6 @@
+package com.example.StackFlowBackend.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.StackFlowBackend.model.Categoria;
+
+public interface CategoriaRepository extends JpaRepository<Categoria, Long> {}

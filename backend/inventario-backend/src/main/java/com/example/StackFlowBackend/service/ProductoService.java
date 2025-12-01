@@ -27,21 +27,22 @@ public class ProductoService {
         return repository.save(producto);
     }
 
-    public Producto update(Long id, Producto producto) {
-        Producto existing = findById(id);
-        if (existing == null) return null;
+    public Producto update(Long id, Producto data) {
+        Producto p = repository.findById(id).orElse(null);
+        if (p == null) return null;
 
-        existing.setNombre(producto.getNombre());
-        existing.setDescripcion(producto.getDescripcion());
-        existing.setStock(producto.getStock());
-        existing.setPrecio(producto.getPrecio());
+        p.setNombre(data.getNombre());
+        p.setDescripcion(data.getDescripcion());
+        p.setStock(data.getStock());
+        p.setPrecio(data.getPrecio());
+        p.setCategoria(data.getCategoria());
+        p.setProveedor(data.getProveedor());
 
-        return repository.save(existing);
+        return repository.save(p);
     }
 
     public void delete(Long id) {
-
         repository.deleteById(id);
-
     }
 }
+/**/

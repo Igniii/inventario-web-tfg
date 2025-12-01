@@ -1,0 +1,33 @@
+<h2>{{ tipo === 'ENTRADA' ? 'Registrar entrada de stock' : 'Registrar salida de stock' }}</h2>
+
+<form (ngSubmit)="guardar()">
+
+  <mat-form-field appearance="outline" style="width: 100%;">
+    <mat-label>Producto</mat-label>
+    <mat-select [(ngModel)]="movimiento.producto" name="producto" required>
+      <mat-option *ngFor="let p of productos" [value]="{ id: p.id }">
+        {{ p.nombre }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" style="width: 100%;">
+    <mat-label>Cantidad</mat-label>
+    <input matInput type="number" [(ngModel)]="movimiento.cantidad" name="cantidad" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" style="width: 100%;">
+    <mat-label>Nota (opcional)</mat-label>
+    <input matInput [(ngModel)]="movimiento.nota" name="nota">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">
+    Guardar movimiento
+  </button>
+
+  <!-- Botón corregido -->
+  <button mat-button type="button" routerLink="/movimientos">
+    Cancelar
+  </button>
+
+</form>

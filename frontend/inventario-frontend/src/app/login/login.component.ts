@@ -1,32 +1,41 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
-  template: `
-    <h2>Login</h2>
-    <form (ngSubmit)="submit()">
-      <input [(ngModel)]="username" name="username" placeholder="Usuario"/>
-      <input [(ngModel)]="password" name="password" type="password" placeholder="Contraseña"/>
-      <button type="submit">Entrar</button>
-    </form>
-  `
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
+  ],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+
   username = '';
   password = '';
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    public auth: AuthService,
+    private router: Router
+  ) {}
 
-  submit() {
-    this.auth.login(this.username, this.password)
-      .subscribe({
-        next: () => this.router.navigate(['/productos']),
-        error: () => alert('Credenciales incorrectas')
-      });
+  login() {
+    this.auth.login(this.username, this.password).subscribe({
+      next: () => this.router.navigate(['/']),
+      error: err => console.error('Error en login', err)
+    });
   }
 }

@@ -1,1 +1,32 @@
-<p>login works!</p>
+<div class="login-background">
+  <div class="login-container mat-elevation-z6">
+
+    <h2>Iniciar sesión</h2>
+
+    <form (ngSubmit)="login()" #form="ngForm">
+
+      <!-- Usuario -->
+      <mat-form-field appearance="outline" class="input-full">
+        <mat-label>Usuario</mat-label>
+        <input matInput required name="username" [(ngModel)]="username">
+      </mat-form-field>
+
+      <!-- Contraseña -->
+      <mat-form-field appearance="outline" class="input-full">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" required name="password" [(ngModel)]="password">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="btn-full">
+        Entrar
+      </button>
+
+    </form>
+
+    <p class="register-link">
+      ¿No tienes cuenta?
+      <a routerLink="/register">Crear cuenta</a>
+    </p>
+
+  </div>
+</div>

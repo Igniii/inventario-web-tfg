@@ -1,0 +1,47 @@
+.register-background {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Fondo suave */
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+}
+
+.register-container {
+  width: 360px;
+  padding: 32px;
+  border-radius: 12px;
+  background: white;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  animation: fadeIn 0.4s ease;
+}
+
+h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.input-full {
+  width: 100%;
+}
+
+.btn-full {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 12px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}

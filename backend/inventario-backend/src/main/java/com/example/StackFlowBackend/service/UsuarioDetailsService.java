@@ -22,8 +22,14 @@ public class UsuarioDetailsService implements UserDetailsService {
         Usuario u = usuarioRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
 
-        // Convertir rol en GrantedAuthority
-        List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(u.getRole()));
+        // Asegurar prefijo ROLE_
+        String role = u.getRole();
+        if (!role.startsWith("ROLE_")) {
+            role = "ROLE_" + role;
+        }
+
+        List<SimpleGrantedAuthority> authorities =
+                List.of(new SimpleGrantedAuthority(role));
 
         return new User(u.getUsername(), u.getPassword(), authorities);
     }

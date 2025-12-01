@@ -1,0 +1,20 @@
+<mat-toolbar color="primary" class="toolbar">
+  <span class="title">StockFlow Dashboard</span>
+</mat-toolbar>
+
+<div class="content">
+  <mat-card class="card kpi-card">
+    <h2>Inventario total</h2>
+    <p class="kpi-value">{{ totalInventario }} unidades</p>
+  </mat-card>
+
+  <mat-card class="card kpi-card">
+    <h2>Productos</h2>
+    <p class="kpi-value">{{ totalProductos }} registrados</p>
+  </mat-card>
+
+  <mat-card class="card kpi-card">
+    <h2>Movimientos del día</h2>
+    <p class="kpi-value">{{ movimientosHoy }}</p>
+  </mat-card>
+</div>

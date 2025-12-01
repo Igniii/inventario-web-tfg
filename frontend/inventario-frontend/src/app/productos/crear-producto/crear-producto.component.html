@@ -1,0 +1,33 @@
+<h2>Crear producto</h2>
+
+<form (ngSubmit)="crearProducto()">
+
+  <label>Nombre:</label>
+  <input type="text" [(ngModel)]="producto.nombre" name="nombre" required>
+
+  <label>Descripción:</label>
+  <input type="text" [(ngModel)]="producto.descripcion" name="descripcion">
+
+  <label>Stock:</label>
+  <input type="number" [(ngModel)]="producto.stock" name="stock" required>
+
+  <label>Precio:</label>
+  <input type="number" [(ngModel)]="producto.precio" name="precio" required>
+
+  <label>Categoría:</label>
+  <select [(ngModel)]="producto.categoriaId" name="categoriaId" required>
+    <option *ngFor="let cat of categorias" [value]="cat.id">
+      {{ cat.nombre }}
+    </option>
+  </select>
+
+  <label>Proveedor:</label>
+  <select [(ngModel)]="producto.proveedorId" name="proveedorId" required>
+    <option *ngFor="let p of proveedores" [value]="p.id">
+      {{ p.nombre }}
+    </option>
+  </select>
+
+  <button type="submit">Guardar</button>
+
+</form>

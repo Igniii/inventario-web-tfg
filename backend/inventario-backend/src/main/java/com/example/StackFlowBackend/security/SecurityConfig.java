@@ -36,18 +36,35 @@ public class SecurityConfig {
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
 
-                        // Preflight CORS
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
-                        // Endpoints públicos
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/health", "/actuator/health").permitAll()
+                        .requestMatchers("/api/health").permitAll()
 
-                        // GET, productos es privado, requiere el token generado por JWT al hacer login
-                        .requestMatchers("/api/productos/**").authenticated()
+                        // Solo ADMIN crea o borra productos
+                        .requestMatchers(HttpMethod.POST, "/api/productos/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/productos/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/productos/**").hasRole("ADMIN")
+                        // Solo ADMIN crea o borra categorías
+                        .requestMatchers(HttpMethod.POST, "/api/categorias/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/categorias/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/categorias/**").hasRole("ADMIN")
+                        // Solo ADMIN crea o borra proveedores
+                        .requestMatchers(HttpMethod.POST, "/api/proveedores/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/proveedores/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/proveedores/**").hasRole("ADMIN")
+                        // Solo ADMIN añade o quita stock de un producto
+                        // ADMIN puede crear movimientos (entradas/salidas de stock)
+                        .requestMatchers(HttpMethod.POST, "/api/movimientos/**").hasRole("ADMIN")
+                        // ADMIN puede eliminar movimientos
+                        .requestMatchers(HttpMethod.DELETE, "/api/movimientos/**").hasRole("ADMIN")
+                        // USER y ADMIN pueden consultar movimientos
+                        .requestMatchers(HttpMethod.GET, "/api/movimientos/**").hasAnyRole("ADMIN", "USER"
+                        // USER puede ver productos y categorías
+                        .requestMatchers(HttpMethod.GET, "/api/productos/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/api/categorias/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "api/proveedores/**").hasAnyRole("ADMIN", "USER")
 
-
-                        // Todo lo demás requiere token
+                        // Por si queda algo suelto
                         .anyRequest().authenticated()
                 )
 

@@ -6,6 +6,7 @@ import com.example.StackFlowBackend.service.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.example.StackFlowBackend.dto.RegisterRequest;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -26,4 +27,14 @@ public class AuthController {
         }
         return ResponseEntity.ok(resp);
     }
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody RegisterRequest req) {
+        try {
+            authService.register(req.getUsername(), req.getPassword());
+            return ResponseEntity.status(201).build();
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
 }

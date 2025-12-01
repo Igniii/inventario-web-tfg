@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/productos")
-@CrossOrigin(origins = "http://localhost:4200") // Temporal para pruebas
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProductoController {
 
     private final ProductoService service;
@@ -33,8 +33,8 @@ public class ProductoController {
     }
 
     @PutMapping("/{id}")
-    public Producto update(@PathVariable Long id, @RequestBody Producto producto) {
-        return service.update(id, producto);
+    public Producto update(@PathVariable Long id, @RequestBody Producto data) {
+        return service.update(id, data);
     }
 
     @DeleteMapping("/{id}")

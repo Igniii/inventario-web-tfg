@@ -1,0 +1,21 @@
+<h2>Crear categoría</h2>
+
+<form (ngSubmit)="crear()">
+
+  <label>Nombre:</label>
+  <input
+    type="text"
+    [(ngModel)]="nombre"
+    name="nombre"
+    required
+  />
+
+  <br><br>
+
+  <button type="submit">Crear</button>
+
+  <button type="button" (click)="volver()">
+    Cancelar
+  </button>
+
+</form>

@@ -1,0 +1,73 @@
+<mat-toolbar color="primary" style="padding: 0 16px;">
+
+  <!-- LOGOTIPO -->
+  <img
+    src="logo.png"
+    alt="Logo"
+    routerLink="/"
+    style="height: 40px; width: auto; object-fit: contain; cursor: pointer; margin-right: 16px;"
+  />
+
+
+  <!-- Inicio -->
+  <button mat-button routerLink="/">Inicio</button>
+
+  <!-- Inventario -->
+  <button *ngIf="isLoggedIn()" mat-button routerLink="/productos">
+    Inventario
+  </button>
+
+  <!-- Herramientas (dropdown) -->
+  <button
+    *ngIf="isLoggedIn()"
+    mat-button
+    [matMenuTriggerFor]="menuHerramientas">
+    Herramientas
+    <mat-icon>arrow_drop_down</mat-icon>
+  </button>
+
+  <mat-menu #menuHerramientas="matMenu">
+
+    <button mat-menu-item routerLink="/categorias">
+      <mat-icon>category</mat-icon>
+      <span>Categorías</span>
+    </button>
+
+    <button mat-menu-item routerLink="/proveedores">
+      <mat-icon>store</mat-icon>
+      <span>Proveedores</span>
+    </button>
+
+    <button mat-menu-item routerLink="/movimientos">
+      <mat-icon>swap_vert</mat-icon>
+      <span>Movimientos stock</span>
+    </button>
+
+  </mat-menu>
+
+  <!-- Admin panel -->
+  <button
+    *ngIf="auth.isAdmin()"
+    mat-button routerLink="/admin"
+    color="warn">
+    Panel de administrador
+  </button>
+
+  <!-- Espaciador -->
+  <span style="flex: 1 1 auto;"></span>
+
+  <!-- No logado -->
+  <button *ngIf="!isLoggedIn()" mat-button routerLink="/login">
+    Iniciar sesión
+  </button>
+
+  <button *ngIf="!isLoggedIn()" mat-button routerLink="/register">
+    Registrarse
+  </button>
+
+  <!-- Logado -->
+  <button *ngIf="isLoggedIn()" mat-button (click)="logout()">
+    Cerrar sesión
+  </button>
+
+</mat-toolbar>

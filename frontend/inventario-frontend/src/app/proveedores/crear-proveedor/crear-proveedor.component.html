@@ -1,0 +1,12 @@
+<h2>Crear proveedor</h2>
+
+<form (ngSubmit)="crear()">
+
+  <label>Nombre:</label>
+  <input type="text" [(ngModel)]="proveedor.nombre" name="nombre" required>
+
+  <label>Contacto:</label>
+  <input type="text" [(ngModel)]="proveedor.contacto" name="contacto" required>
+
+  <button type="submit">Guardar</button>
+</form>
