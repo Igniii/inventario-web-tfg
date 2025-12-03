@@ -1,16 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoriaService, Categoria } from '../../services/categoria.service';
 import { ProveedorService, Proveedor } from '../../services/proveedor.service';
 import { ProductoService } from '../../services/producto.service';
 import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-crear-producto',
   standalone: true,
-  imports: [FormsModule, CommonModule],
-  templateUrl: './crear-producto.component.html'
+  imports: [FormsModule, CommonModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule],
+  templateUrl: './crear-producto.component.html',
+  styleUrls: ['./crear-producto.component.css']
 })
 export class CrearProductoComponent implements OnInit {
 
@@ -64,4 +69,8 @@ export class CrearProductoComponent implements OnInit {
       error: err => console.error('Error creando producto', err)
     });
   }
+
+  volver() {
+      this.router.navigate(['/productos']);
+    }
 }

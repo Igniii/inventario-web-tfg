@@ -1,14 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProveedorService, Proveedor } from '../../services/proveedor.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-editar-proveedor',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './editar-proveedor.component.html'
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule],
+  templateUrl: './editar-proveedor.component.html',
+  styleUrls: ['./editar-proveedor.component.css']
 })
 export class EditarProveedorComponent implements OnInit {
 

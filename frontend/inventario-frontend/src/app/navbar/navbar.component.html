@@ -1,13 +1,12 @@
 <mat-toolbar color="primary" style="padding: 0 16px;">
 
-  <!-- LOGOTIPO -->
+  <!-- LOGO -->
   <img
     src="logo.png"
     alt="Logo"
     routerLink="/"
     style="height: 40px; width: auto; object-fit: contain; cursor: pointer; margin-right: 16px;"
   />
-
 
   <!-- Inicio -->
   <button mat-button routerLink="/">Inicio</button>
@@ -17,7 +16,7 @@
     Inventario
   </button>
 
-  <!-- Herramientas (dropdown) -->
+  <!-- Herramientas -->
   <button
     *ngIf="isLoggedIn()"
     mat-button
@@ -27,7 +26,6 @@
   </button>
 
   <mat-menu #menuHerramientas="matMenu">
-
     <button mat-menu-item routerLink="/categorias">
       <mat-icon>category</mat-icon>
       <span>Categorías</span>
@@ -42,32 +40,59 @@
       <mat-icon>swap_vert</mat-icon>
       <span>Movimientos stock</span>
     </button>
-
   </mat-menu>
 
   <!-- Admin panel -->
   <button
     *ngIf="auth.isAdmin()"
-    mat-button routerLink="/admin"
+    mat-button
+    routerLink="/admin"
     color="warn">
     Panel de administrador
   </button>
 
-  <!-- Espaciador -->
+  <!-- Espacio hacia la derecha -->
   <span style="flex: 1 1 auto;"></span>
 
-  <!-- No logado -->
-  <button *ngIf="!isLoggedIn()" mat-button routerLink="/login">
-    Iniciar sesión
-  </button>
+  <!-- USUARIO LOGADO (con menú) -->
+  <ng-container *ngIf="usernameValue; else noSesion">
 
-  <button *ngIf="!isLoggedIn()" mat-button routerLink="/register">
-    Registrarse
-  </button>
+    <!-- Botón estilo avatar/usuario -->
+    <button
+      mat-button
+      [matMenuTriggerFor]="menuUsuario"
+      style="text-transform: none; font-weight: 500;">
+      <mat-icon>account_circle</mat-icon>
+      {{ usernameValue }}
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
 
-  <!-- Logado -->
-  <button *ngIf="isLoggedIn()" mat-button (click)="logout()">
-    Cerrar sesión
-  </button>
+    <mat-menu #menuUsuario="matMenu">
+      <!--
+       1/12/2025 Si me da tiempo, implementaré un componente de página de perfil de usuario,
+       de momento lo dejo comentado
+       <button mat-menu-item routerLink="/perfil">
+       <mat-icon>person</mat-icon>
+       Perfil
+     </button>  -->
+
+     <button mat-menu-item (click)="logout()">
+       <mat-icon>logout</mat-icon>
+       Cerrar sesión
+     </button>
+   </mat-menu>
+
+ </ng-container>
+
+ <!-- NO LOGADO -->
+  <ng-template #noSesion>
+    <button mat-button routerLink="/login">
+      Iniciar sesión
+    </button>
+    <button mat-button routerLink="/register">
+      Registrarse
+    </button>
+  </ng-template>
 
 </mat-toolbar>
+<!-- Fin del archivo navbar.component.html -->

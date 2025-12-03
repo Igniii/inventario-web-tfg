@@ -1,12 +1,27 @@
-<h2>Crear proveedor</h2>
+<div class="form-container">
 
-<form (ngSubmit)="crear()">
+  <div class="form-title">Crear proveedor</div>
 
-  <label>Nombre:</label>
-  <input type="text" [(ngModel)]="proveedor.nombre" name="nombre" required>
+  <form (ngSubmit)="crear()">
 
-  <label>Contacto:</label>
-  <input type="text" [(ngModel)]="proveedor.contacto" name="contacto" required>
+    <!-- Nombre -->
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="proveedor.nombre" name="nombre" required>
+    </mat-form-field>
 
-  <button type="submit">Guardar</button>
-</form>
+    <!-- Contacto -->
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Contacto</mat-label>
+      <input matInput [(ngModel)]="proveedor.contacto" name="contacto" required>
+    </mat-form-field>
+
+    <!-- Botones -->
+    <div class="button-row">
+      <button mat-stroked-button color="primary" type="button" (click)="volver()">Cancelar</button>
+      <button mat-flat-button color="primary" type="submit">Guardar</button>
+    </div>
+
+  </form>
+
+</div>

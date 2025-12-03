@@ -24,6 +24,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class NavbarComponent {
 
+username: string | null = null;
+
   constructor(
     public auth: AuthService,
     private router: Router
@@ -37,4 +39,9 @@ export class NavbarComponent {
     this.auth.logout();
     this.router.navigate(['/login']);
   }
+// Exponer el valor del signal a la plantilla *ngIf
+  get usernameValue() {
+    return this.auth.usernameSignal();
+  }
+
 }

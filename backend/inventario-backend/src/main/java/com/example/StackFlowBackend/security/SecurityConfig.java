@@ -58,7 +58,7 @@ public class SecurityConfig {
                         // ADMIN puede eliminar movimientos
                         .requestMatchers(HttpMethod.DELETE, "/api/movimientos/**").hasRole("ADMIN")
                         // USER y ADMIN pueden consultar movimientos
-                        .requestMatchers(HttpMethod.GET, "/api/movimientos/**").hasAnyRole("ADMIN", "USER"
+                        .requestMatchers(HttpMethod.GET, "/api/movimientos/**").hasAnyRole("ADMIN", "USER")
                         // USER puede ver productos y categorías
                         .requestMatchers(HttpMethod.GET, "/api/productos/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers(HttpMethod.GET, "/api/categorias/**").hasAnyRole("ADMIN", "USER")

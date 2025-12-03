@@ -1,17 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ProductoService, Producto } from '../../services/producto.service';
 import { CategoriaService, Categoria } from '../../services/categoria.service';
 import { ProveedorService, Proveedor } from '../../services/proveedor.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-editar-producto',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './editar-producto.component.html'
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule],
+  templateUrl: './editar-producto.component.html',
+  styleUrls: ['./editar-producto.component.css']
 })
 export class EditarProductoComponent implements OnInit {
 
@@ -73,5 +78,8 @@ export class EditarProductoComponent implements OnInit {
       next: () => this.router.navigate(['/productos']),
       error: err => console.error('Error actualizando producto', err)
     });
+  }
+volver() {
+    this.router.navigate(['/productos']);
   }
 }

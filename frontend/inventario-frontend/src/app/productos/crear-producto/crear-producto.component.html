@@ -1,33 +1,51 @@
-<h2>Añadir nuevo inventario</h2>
+<div class="form-container">
 
-<form (ngSubmit)="crearProducto()">
+  <div class="form-title">Añadir nuevo inventario</div>
 
-  <label>Nombre:</label>
-  <input type="text" [(ngModel)]="producto.nombre" name="nombre" required>
+  <form (ngSubmit)="crearProducto()">
 
-  <label>Descripción:</label>
-  <input type="text" [(ngModel)]="producto.descripcion" name="descripcion">
+    <!-- Nombre -->
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="producto.nombre" name="nombre" required>
+    </mat-form-field>
 
-  <label>Stock:</label>
-  <input type="number" [(ngModel)]="producto.stock" name="stock" required>
+    <!-- Descripción -->
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Descripción</mat-label>
+      <input matInput [(ngModel)]="producto.descripcion" name="descripcion">
+    </mat-form-field>
 
-  <label>Precio:</label>
-  <input type="number" [(ngModel)]="producto.precio" name="precio" required>
 
-  <label>Categoría:</label>
-  <select [(ngModel)]="producto.categoriaId" name="categoriaId" required>
-    <option *ngFor="let cat of categorias" [value]="cat.id">
-      {{ cat.nombre }}
-    </option>
-  </select>
 
-  <label>Proveedor:</label>
-  <select [(ngModel)]="producto.proveedorId" name="proveedorId" required>
-    <option *ngFor="let p of proveedores" [value]="p.id">
-      {{ p.nombre }}
-    </option>
-  </select>
+    <!-- Precio -->
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Precio/uds</mat-label>
+      <input matInput type="number" [(ngModel)]="producto.precio" name="precio" required>
+    </mat-form-field>
 
-  <button type="submit">Guardar</button>
+    <!-- Categoría -->
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Categoría</mat-label>
+      <mat-select [(ngModel)]="producto.categoriaId" name="categoriaId" required>
+        <mat-option *ngFor="let cat of categorias" [value]="cat.id">{{ cat.nombre }}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-</form>
+    <!-- Proveedor -->
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Proveedor</mat-label>
+      <mat-select [(ngModel)]="producto.proveedorId" name="proveedorId" required>
+        <mat-option *ngFor="let p of proveedores" [value]="p.id">{{ p.nombre }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Botones -->
+    <div class="button-row">
+      <button mat-stroked-button color="primary" type="button" (click)="volver()">Cancelar </button>
+      <button mat-flat-button color="primary" type="submit">Guardar</button>
+    </div>
+
+  </form>
+
+</div>

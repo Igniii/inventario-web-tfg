@@ -11,3 +11,7 @@ TODO
 - Documentación / Memoria
 - Al añadir/quitar stock desde /productos que esté preseleccionado el producto al que estás añadiendo quitando stock
 - En el navbar tiene que aparecer el nombre del usuario con la sesión iniciada, debe ser el mismo que el del nombre de usuario
+- Alerta si hay nivel crítico de stock?
+- Al añadir o quitar stock, debe salir el usuario responsable de cada operación(bàsicament el usuari logat).
+- Al entrar a /productos y añadir inventario, si cancelo me lleva a /movimiento porque 
+	tengo el método que me devuelva a /movimiento desde /movimiento entrada
