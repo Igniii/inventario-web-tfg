@@ -1,0 +1,5 @@
+.movement-buttons {
+  display: flex;
+  gap: 12px;       /* Espacio entre los botones */
+  margin-bottom: 15px;
+}

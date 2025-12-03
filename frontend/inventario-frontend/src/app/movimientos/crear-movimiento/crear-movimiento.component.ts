@@ -18,14 +18,15 @@ import { ProductoService, Producto } from '../../services/producto.service';
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule,    // <- añadir
+    RouterModule,
     RouterLink,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule
   ],
-  templateUrl: './crear-movimiento.component.html'
+  templateUrl: './crear-movimiento.component.html',
+  styleUrls: ['./crear-movimiento.component.css']
 })
 export class CrearMovimientoComponent implements OnInit {
 

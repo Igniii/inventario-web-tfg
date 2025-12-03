@@ -15,7 +15,8 @@ import { AuthService } from '../services/auth.service';
     MatTableModule,
     MatButtonModule
   ],
-  templateUrl: './movimientos.component.html'
+  templateUrl: './movimientos.component.html',
+  styleUrls: ['./movimientos.component.css']
 })
 export class MovimientosComponent implements OnInit {
 
