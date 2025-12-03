@@ -38,4 +38,12 @@ export class LoginComponent {
       error: err => console.error('Error en login', err)
     });
   }
+  ngOnInit() {
+    document.body.classList.add('no-scroll');
+  }
+
+  ngOnDestroy() {
+    document.body.classList.remove('no-scroll');
+  }
+
 }

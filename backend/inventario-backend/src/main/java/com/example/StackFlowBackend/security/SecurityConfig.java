@@ -52,6 +52,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/proveedores/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/proveedores/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/proveedores/**").hasRole("ADMIN")
+                        // Solo ADMIN puede ver y crear los usuarios desde el endpoint de administración
+                        .requestMatchers(HttpMethod.GET, "/api/admin/usuarios/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/admin/usuarios/**").hasRole("ADMIN")
+
                         // Solo ADMIN añade o quita stock de un producto
                         // ADMIN puede crear movimientos (entradas/salidas de stock)
                         .requestMatchers(HttpMethod.POST, "/api/movimientos/**").hasRole("ADMIN")

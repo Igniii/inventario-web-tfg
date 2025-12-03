@@ -46,4 +46,12 @@ export class RegisterComponent {
       error: err => console.error('Error en registro', err)
     });
   }
+  ngOnInit() {
+    document.body.classList.add('no-scroll');
+  }
+
+  ngOnDestroy() {
+    document.body.classList.remove('no-scroll');
+  }
+
 }
