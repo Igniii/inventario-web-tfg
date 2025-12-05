@@ -1,0 +1,62 @@
+<h2>Inventario</h2>
+
+<button mat-raised-button color="primary" *ngIf="auth.isAdmin()" (click)="irCrear()">
+  Añadir nuevo inventario
+</button>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+
+  <!-- Nombre -->
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let p"> {{ p.nombre }} </td>
+  </ng-container>
+
+  <!-- Descripción -->
+  <ng-container matColumnDef="descripcion">
+    <th mat-header-cell *matHeaderCellDef> Descripción </th>
+    <td mat-cell *matCellDef="let p"> {{ p.descripcion }} </td>
+  </ng-container>
+
+  <!-- Precio -->
+  <ng-container matColumnDef="precio">
+    <th mat-header-cell *matHeaderCellDef> Precio </th>
+    <td mat-cell *matCellDef="let p"> {{ p.precio }} € </td>
+  </ng-container>
+
+  <!-- Stock -->
+  <ng-container matColumnDef="stock">
+    <th mat-header-cell *matHeaderCellDef> Stock </th>
+    <td mat-cell *matCellDef="let p"> {{ p.stock }} </td>
+  </ng-container>
+
+  <!-- Categoría -->
+  <ng-container matColumnDef="categoria">
+    <th mat-header-cell *matHeaderCellDef> Categoría </th>
+    <td mat-cell *matCellDef="let p">
+      {{ p.categoria?.nombre || 'Sin categoría' }}
+    </td>
+  </ng-container>
+
+  <!-- Proveedor -->
+  <ng-container matColumnDef="proveedor">
+    <th mat-header-cell *matHeaderCellDef> Proveedor </th>
+    <td mat-cell *matCellDef="let p">
+      {{ p.proveedor?.nombre || 'Sin proveedor' }}
+    </td>
+  </ng-container>
+
+  <!-- Acciones -->
+  <ng-container matColumnDef="acciones" *ngIf="auth.isAdmin()">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let p">
+      <button mat-button color="accent" (click)="editar(p.id!)">Editar</button>
+      <button mat-button color="warn" (click)="eliminarProducto(p.id!)">Eliminar</button>
+      <button mat-stroked-button color="primary" (click)="entradaStock(p.id!)">Entrada Stock</button>
+      <button mat-stroked-button color="warn" (click)="salidaStock(p.id!)">Salida Stock</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

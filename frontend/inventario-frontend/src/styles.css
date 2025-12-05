@@ -1,0 +1,17 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow-y: auto; /* permitir scroll por defecto */
+}
+
+/* Solo las páginas con esta clase NO podrán hacer scroll */
+.no-scroll-page {
+  height: 100vh;
+  overflow: hidden;
+}
+body.no-scroll {
+  overflow: hidden !important;
+  height: 100vh;
+}
