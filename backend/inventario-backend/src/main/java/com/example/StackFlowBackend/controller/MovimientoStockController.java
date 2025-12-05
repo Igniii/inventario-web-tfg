@@ -10,7 +10,7 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/movimientos")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class MovimientoStockController {
 
     private final MovimientoStockService movimientoService;

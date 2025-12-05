@@ -11,7 +11,8 @@ import java.util.Map;
 import com.example.StackFlowBackend.repository.ProductoRepository;
 import com.example.StackFlowBackend.repository.MovimientoStockRepository;
 import com.example.StackFlowBackend.model.Producto;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
+@CrossOrigin(origins = "*")
 @RestController
 public class DashboardController {
 
