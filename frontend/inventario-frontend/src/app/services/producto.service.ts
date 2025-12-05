@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Categoria } from '../services/categoria.service';
 import { Proveedor } from './proveedor.service';
+import { environment } from '../../environments/environment';
 
 export interface Producto {
   id?: number;
@@ -19,7 +20,7 @@ export interface Producto {
 })
 export class ProductoService {
 
-  private apiUrl = 'http://localhost:8080/api/productos';
+  private apiUrl = `${environment.apiUrl}/api/productos`;
 
   constructor(private http: HttpClient) {}
 

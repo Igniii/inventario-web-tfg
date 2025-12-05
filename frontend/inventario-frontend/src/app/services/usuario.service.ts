@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 export interface Usuario {
   id: number;
@@ -12,7 +13,7 @@ export interface Usuario {
 })
 export class UsuarioService {
 
-  private API_URL = 'http://localhost:8080/api/usuarios';
+  private API_URL = `${environment.apiUrl}/api/usuarios`;
 
   constructor(private http: HttpClient) {}
 

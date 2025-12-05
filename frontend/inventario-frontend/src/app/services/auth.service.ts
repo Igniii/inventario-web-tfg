@@ -2,13 +2,14 @@ import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
 import {jwtDecode} from 'jwt-decode';   // ← IMPORTACIÓN CORRECTA
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private API_URL = 'http://localhost:8080/api/auth';
+  private API_URL = environment.apiUrl;
   private TOKEN_KEY = 'jwt_token';
 
   // Señal que notifica login/logout
@@ -27,7 +28,7 @@ export class AuthService {
   // LOGIN: guardar token, activar señal y actualizar username
   // =====================================================
   login(username: string, password: string) {
-    return this.http.post<{ token: string }>(`${this.API_URL}/login`, { username, password })
+    return this.http.post<{ token: string }>(`${environment.apiUrl}/api/auth/login`, { username, password })
       .pipe(
         tap(resp => {
           localStorage.setItem(this.TOKEN_KEY, resp.token);
@@ -50,7 +51,7 @@ export class AuthService {
   }
 
   register(data: { username: string; password: string }) {
-    return this.http.post(`${this.API_URL}/register`, data);
+    return this.http.post(`${environment.apiUrl}/api/auth/register`, data);
   }
 
   getToken(): string | null {
