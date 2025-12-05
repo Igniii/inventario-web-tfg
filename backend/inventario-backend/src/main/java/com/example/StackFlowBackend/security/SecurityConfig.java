@@ -40,41 +40,39 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/health").permitAll()
 
-                        // Solo ADMIN crea o borra productos
-                        .requestMatchers(HttpMethod.POST, "/api/productos/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/productos/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/productos/**").hasRole("ADMIN")
-                        // Solo ADMIN crea o borra categorías
-                        .requestMatchers(HttpMethod.POST, "/api/categorias/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/categorias/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/categorias/**").hasRole("ADMIN")
-                        // Solo ADMIN crea o borra proveedores
-                        .requestMatchers(HttpMethod.POST, "/api/proveedores/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/proveedores/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/proveedores/**").hasRole("ADMIN")
-                        // Solo ADMIN puede ver y crear los usuarios desde el endpoint de administración
-                        .requestMatchers(HttpMethod.GET, "/api/admin/usuarios/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/admin/usuarios/**").hasRole("ADMIN")
-
-                        // Solo ADMIN añade o quita stock de un producto
-                        // ADMIN puede crear movimientos (entradas/salidas de stock)
-                        .requestMatchers(HttpMethod.POST, "/api/movimientos/**").hasRole("ADMIN")
-                        // ADMIN puede eliminar movimientos
-                        .requestMatchers(HttpMethod.DELETE, "/api/movimientos/**").hasRole("ADMIN")
-                        // USER y ADMIN pueden consultar movimientos
-                        .requestMatchers(HttpMethod.GET, "/api/movimientos/**").hasAnyRole("ADMIN", "USER")
-                        // USER puede ver productos y categorías
+                        // --- PRODUCTOS ---
                         .requestMatchers(HttpMethod.GET, "/api/productos/**").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.GET, "/api/categorias/**").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.GET, "api/proveedores/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/api/productos/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/productos/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/productos/**").hasRole("ADMIN")
 
-                        // Por si queda algo suelto
+                        // --- PRODUCTOS CRÍTICOS ---
+                        .requestMatchers(HttpMethod.GET, "/api/productos/criticos").hasAnyRole("ADMIN", "USER")
+
+                        // --- CATEGORÍAS ---
+                        .requestMatchers(HttpMethod.GET, "/api/categorias/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/api/categorias/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/categorias/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/categorias/**").hasRole("ADMIN")
+
+                        // --- PROVEEDORES ---
+                        .requestMatchers(HttpMethod.GET, "/api/proveedores/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/api/proveedores/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/proveedores/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/proveedores/**").hasRole("ADMIN")
+
+                        // --- MOVIMIENTOS ---
+                        .requestMatchers(HttpMethod.GET, "/api/movimientos/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/api/movimientos/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/movimientos/**").hasRole("ADMIN")
+
+                        // --- ADMIN USUARIOS ---
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+
                         .anyRequest().authenticated()
                 )
 
-                // REGISTRO DEL FILTRO JWT
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-
                 .formLogin(form -> form.disable())
                 .httpBasic(basic -> basic.disable());
 
@@ -100,7 +98,6 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // Necesario para login con AuthenticationManager
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();

@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MovimientoStockService, MovimientoStock } from '../services/movimiento-stock.service';
 import { AuthService } from '../services/auth.service';
 
+
 @Component({
   selector: 'app-movimientos',
   standalone: true,
@@ -21,7 +22,7 @@ import { AuthService } from '../services/auth.service';
 export class MovimientosComponent implements OnInit {
 
   dataSource = new MatTableDataSource<MovimientoStock>([]);
-  displayedColumns = ['fecha', 'producto', 'tipo', 'cantidad', 'nota'];
+  displayedColumns = ['fecha','usuarioResponsable','producto', 'tipo', 'cantidad', 'nota'];
 
   constructor(
     private movimientoService: MovimientoStockService,

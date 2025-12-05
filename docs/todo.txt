@@ -4,14 +4,18 @@ añadir entidad proveedores, relacionada con productos y categorías
 editar productos
 estilos para poder visualizar todo
 pantalla inicial tras login dónde ver resumen de stock (dashboard sencillo)
+- En el navbar tiene que aparecer el nombre del usuario con la sesión iniciada, debe ser el mismo que el del nombre de usuario
+- Cambiar estilo a componentes: crear-producto, crear-categoria, crear-proveedor y editar-x
+- Crear componente admin-panel (poder crear, editar (nombre, contraseña) y eliminar usuarios)
+
 
 TODO
-- Cambiar estilo a componentes: crear-producto, crear-categoria, crear-proveedor
-- Crear componente admin-panel (poder crear, editar (nombre, contraseña) y eliminar usuarios)
+
 - Documentación / Memoria
 - Al añadir/quitar stock desde /productos que esté preseleccionado el producto al que estás añadiendo quitando stock
-- En el navbar tiene que aparecer el nombre del usuario con la sesión iniciada, debe ser el mismo que el del nombre de usuario
-- Alerta si hay nivel crítico de stock?
-- Al añadir o quitar stock, debe salir el usuario responsable de cada operación(bàsicament el usuari logat).
-- Al entrar a /productos y añadir inventario, si cancelo me lleva a /movimiento porque 
-	tengo el método que me devuelva a /movimiento desde /movimiento entrada
+
+
+
+
+https://medium.com/@MohamedManbar/how-to-build-a-full-stack-java-angular-application-step-by-step-d53a17bdcba7
+https://www.jwt.io

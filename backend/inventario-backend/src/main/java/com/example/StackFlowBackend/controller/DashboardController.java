@@ -2,6 +2,10 @@ package com.example.StackFlowBackend.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Map;
 
 import com.example.StackFlowBackend.repository.ProductoRepository;
@@ -24,7 +28,13 @@ public class DashboardController {
     public Map<String, Object> getStats() {
 
         long totalProductos = productoRepository.count();
-        long movimientosHoy = movimientoRepository.count();
+
+        // Calcular movimientos del día (hoy)
+        LocalDate today = LocalDate.now();
+        LocalDateTime start = today.atStartOfDay();
+        LocalDateTime end = today.atTime(LocalTime.MAX);
+
+        long movimientosHoy = movimientoRepository.countByFechaBetween(start, end);
 
         // Sumar stock total de todos los productos
         long totalInventario = productoRepository.findAll()
@@ -32,10 +42,14 @@ public class DashboardController {
                 .mapToLong(Producto::getStock)
                 .sum();
 
+        // NUEVO: cantidad de productos críticos
+        long productosCriticos = productoRepository.findProductosCriticos().size();
+
         return Map.of(
                 "totalInventario", totalInventario,
                 "totalProductos", totalProductos,
-                "movimientosHoy", movimientosHoy
+                "movimientosHoy", movimientosHoy,
+                "productosCriticos", productosCriticos
         );
     }
 

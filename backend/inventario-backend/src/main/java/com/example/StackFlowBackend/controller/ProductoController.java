@@ -3,6 +3,8 @@ package com.example.StackFlowBackend.controller;
 import com.example.StackFlowBackend.model.Producto;
 import com.example.StackFlowBackend.service.ProductoService;
 import org.springframework.web.bind.annotation.*;
+import java.util.stream.Collectors;
+
 
 import java.util.List;
 
@@ -16,7 +18,13 @@ public class ProductoController {
     public ProductoController(ProductoService service) {
         this.service = service;
     }
-
+    @GetMapping("/criticos")
+    public List<ProductoCriticoDTO> getProductosCriticos() {
+        return service.obtenerProductosCriticos()
+                .stream()
+                .map(p -> new ProductoCriticoDTO(p.getId(), p.getNombre(), p.getStock(), p.getStockMinimo()))
+                .collect(Collectors.toList());
+    }
     @GetMapping
     public List<Producto> getAll() {
         return service.findAll();
@@ -41,4 +49,9 @@ public class ProductoController {
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
+
+    public static record ProductoCriticoDTO(Long id, String nombre, Integer stock, Integer stockMinimo) {}
+
 }
+

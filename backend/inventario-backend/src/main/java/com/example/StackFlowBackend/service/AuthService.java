@@ -37,12 +37,8 @@ public class AuthService {
         if (!passwordEncoder.matches(req.getPassword(), user.getPassword())) {
             return null;
         }
-
         // Generar JWT
         String token = jwtService.generateToken(user);
-
-
-
         return new LoginResponse(token);
     }
 

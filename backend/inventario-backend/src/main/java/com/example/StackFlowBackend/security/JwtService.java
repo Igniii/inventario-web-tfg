@@ -15,7 +15,9 @@ import java.util.Map;
 @Service
 public class JwtService {
 
-    private final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    // Clave fija segura (mínimo 32 chars para HS256)
+    private static final String SECRET = "MI_CLAVE_SECRETA_SEGURA_DE_32+_CARACTERES_2025";
+    private final Key SECRET_KEY = Keys.hmacShaKeyFor(SECRET.getBytes());
 
     public String extractUsername(String token) {
         return extractAllClaims(token).getSubject();
@@ -33,14 +35,14 @@ public class JwtService {
     public String generateToken(Usuario usuario) {
 
         Map<String, Object> claims = new HashMap<>();
-        claims.put("role", usuario.getRole()); // añadir rol al JWT
+        claims.put("role", usuario.getRole()); // Añadir rol
 
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(usuario.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000)) // 24h
-                .signWith(SECRET_KEY)
+                .signWith(SECRET_KEY, SignatureAlgorithm.HS256)
                 .compact();
     }
 

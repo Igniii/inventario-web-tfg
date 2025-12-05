@@ -24,6 +24,8 @@ public class MovimientoStock {
 
     private String nota;
 
+    @Column(name = "usuario_responsable")
+    private String usuarioResponsable;
     public MovimientoStock() {}
 
     @PrePersist
@@ -83,5 +85,11 @@ public class MovimientoStock {
         this.nota = nota;
     }
 
-    // getters y setters
+    public String getUsuarioResponsable() {
+        return usuarioResponsable;
+    }
+
+    public void setUsuarioResponsable(String usuarioResponsable) {
+        this.usuarioResponsable = usuarioResponsable;
+    }
 }

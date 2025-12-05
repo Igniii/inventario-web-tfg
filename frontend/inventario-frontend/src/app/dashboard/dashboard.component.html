@@ -3,6 +3,7 @@
 </mat-toolbar>
 
 <div class="content">
+
   <mat-card class="card kpi-card">
     <h2>Inventario total</h2>
     <p class="kpi-value">{{ totalInventario }} unidades</p>
@@ -17,4 +18,24 @@
     <h2>Movimientos del día</h2>
     <p class="kpi-value">{{ movimientosHoy }}</p>
   </mat-card>
+
+  <!-- NUEVA CARD: PRODUCTOS CRÍTICOS -->
+  <mat-card class="card kpi-card" style="width: 100%; text-align: left;">
+    <h2>Productos con stock crítico</h2>
+
+    <!-- No hay críticos -->
+    <p *ngIf="criticos.length === 0" style="color: #555; margin-top: 10px;">
+      No hay productos en estado crítico.
+    </p>
+
+    <!-- Lista de críticos -->
+    <div *ngIf="criticos.length > 0" style="margin-top: 12px;">
+      <mat-chip-set>
+        <mat-chip *ngFor="let p of criticos" color="warn" selected>
+          {{ p.nombre }} — {{ p.stock }} / min {{ p.stockMinimo }}
+        </mat-chip>
+      </mat-chip-set>
+    </div>
+  </mat-card>
+
 </div>

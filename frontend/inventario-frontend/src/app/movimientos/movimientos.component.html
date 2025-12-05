@@ -28,6 +28,13 @@
       {{ m.fecha | date:'short' }}
     </td>
   </ng-container>
+  <!-- Usuario -->
+  <ng-container matColumnDef="usuarioResponsable">
+    <th mat-header-cell *matHeaderCellDef> Usuario </th>
+    <td mat-cell *matCellDef="let m">
+      {{ m.usuarioResponsable }}
+    </td>
+  </ng-container>
 
   <!-- Producto -->
   <ng-container matColumnDef="producto">

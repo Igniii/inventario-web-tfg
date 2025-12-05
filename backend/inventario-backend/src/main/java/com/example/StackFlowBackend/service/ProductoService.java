@@ -1,10 +1,10 @@
 package com.example.StackFlowBackend.service;
-
 import com.example.StackFlowBackend.model.Producto;
 import com.example.StackFlowBackend.repository.ProductoRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import com.example.StackFlowBackend.repository.ProductoRepository;
+
 
 @Service
 public class ProductoService {
@@ -12,6 +12,7 @@ public class ProductoService {
     private final ProductoRepository repository;
 
     public ProductoService(ProductoRepository repository) {
+
         this.repository = repository;
     }
 
@@ -44,5 +45,10 @@ public class ProductoService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+    public List<Producto> obtenerProductosCriticos() {
+        return repository.findProductosCriticos();
+    }
 }
+
+
 /**/

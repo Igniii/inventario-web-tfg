@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class DashboardService {
 
   private API_URL = 'http://localhost:8080/api/dashboard';
+  private PRODUCTOS_URL = 'http://localhost:8080/api/productos';
 
   constructor(private http: HttpClient) {}
 
@@ -21,5 +22,10 @@ export class DashboardService {
       totalProductos: number;
       movimientosHoy: number;
     }>(`${this.API_URL}/stats`);
+  }
+
+  getCriticos(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.PRODUCTOS_URL}/criticos`);
+
   }
 }

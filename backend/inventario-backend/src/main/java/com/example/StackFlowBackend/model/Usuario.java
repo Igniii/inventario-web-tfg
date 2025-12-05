@@ -14,9 +14,9 @@ public class Usuario {
     private String username;
 
     @Column(nullable = false)
-    private String password; // guardada encriptada
+    private String password;
 
-    private String role; // e.g. "ROLE_ADMIN" or "ROLE_USER"
+    private String role;
 
     public Usuario() {}
 

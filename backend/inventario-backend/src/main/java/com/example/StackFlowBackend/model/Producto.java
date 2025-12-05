@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Column;
 
 @Entity
 public class Producto {
@@ -27,6 +28,8 @@ public class Producto {
     @JoinColumn(name = "proveedor_id")
     private Proveedor proveedor;
 
+    @Column(name = "stock_minimo")
+    private int stockMinimo = 0;
 
     public Producto() {}
 
@@ -93,5 +96,6 @@ public class Producto {
     public void setProveedor(Proveedor proveedor) {
         this.proveedor = proveedor;
     }
-
+    public int getStockMinimo() {return stockMinimo;}
+    public void setStockMinimo(int stockMinimo) {this.stockMinimo = stockMinimo;}
 }
