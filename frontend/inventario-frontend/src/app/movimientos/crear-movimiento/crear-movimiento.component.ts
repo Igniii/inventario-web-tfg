@@ -76,16 +76,14 @@ export class CrearMovimientoComponent implements OnInit {
 
   guardar() {
 
-    // Entradas siempre positivas, salidas siempre negativas
-    if (this.movimiento.tipo === 'SALIDA') {
-      this.movimiento.cantidad = -Math.abs(this.movimiento.cantidad);
-    } else {
-      this.movimiento.cantidad = Math.abs(this.movimiento.cantidad);
-    }
+    // La cantidad siempre debe ser positiva.
+    this.movimiento.cantidad = Math.abs(this.movimiento.cantidad);
 
+    // El tipo ya indica si se suma o se resta en el backend.
     this.movimientoService.crearMovimiento(this.movimiento).subscribe({
       next: () => this.router.navigate(['/movimientos']),
       error: err => console.error(err)
     });
   }
+
 }
