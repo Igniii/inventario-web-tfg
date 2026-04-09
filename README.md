@@ -249,18 +249,6 @@ La aplicación estará disponible en `http://localhost:4200`
 
 ---
 
-## 👤 Credenciales de Acceso
-
-### Entorno de Producción
-
-**Usuario Administrador:**
-- Usuario: `admin`
-- Contraseña: `admin123`
-
-**Nota:** En un entorno de producción real, estas credenciales deben cambiarse inmediatamente.
-
----
-
 ## 📖 Guía de Uso
 
 ### Inicio de Sesión
